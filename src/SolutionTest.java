@@ -8,13 +8,13 @@ class SolutionTest extends AbsTest {
 
     }
 
-    @Test
-    void case2() {
-
-    }
-
-    @Test
-    void case3() {
-
-    }
+//    @Test
+//    void case2() {
+//
+//    }
+//
+//    @Test
+//    void case3() {
+//
+//    }
 }
