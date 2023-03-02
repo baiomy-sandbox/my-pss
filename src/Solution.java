@@ -1,22 +1,69 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Solution {
     void play() {
-        printNum(6840);
+        ArrayStack<Integer> stack = new ArrayStack<>(15);
+//        stack.stack[0]=8;
+        stack.push(981);
+        stack.push(2500);
+        System.out.println(stack.pop());
+        System.out.println(stack.pop());
+        System.out.println(stack.pop());
+        stack.push(5);
+        System.out.println(stack.getTop());
+    }
+}
+
+interface Stack<T> {
+    void push(T value);
+
+    T pop();
+
+    T getTop();
+
+    boolean isEmpty();
+}
+
+class ArrayStack<T> implements Stack<T> {
+    int size;
+    int top = -1;
+    private T[] stack;
+
+    ArrayStack() {
+        size = 100;
+//        Class<T> tClass = (Class<T>) ((T) getClass()
+//                .getGenericSuperclass());
+        stack = (T[]) Array.newInstance(Object.class, size);
     }
 
-    void printNum(int num) {
-        if (num == 0) {
-            return;
-        }
-        System.out.println("num = " + num % 10);
-        printNum(num / 10);
+    ArrayStack( int size) {
+        this.size = size;
+        stack = (T[]) Array.newInstance(Object.class, size);
     }
-    int getSum(int num){
-    if(num==0)return 0;
-        System.out.println(num);
-    return (num%10)+getSum(num/10);
+
+    @Override
+    public void push(T value) {
+        if (top>= size-1) return;
+        top++;
+        stack[top] = value;
     }
-    int getFactorial(int num){
-        if(num<=0)return 1;
-        return num*getFactorial(num-1);
+
+    @Override
+    public T pop() {
+        if (top == -1) return null;
+        top --;
+        return stack[top + 1];
+    }
+
+    @Override
+    public T getTop() {
+
+        return stack[top];
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return top == 0;
     }
 }
