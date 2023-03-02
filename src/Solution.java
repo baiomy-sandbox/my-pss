@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Solution {
     void play() {
-        ArrayStack<Integer> stack = new ArrayStack<>(15);
+        Stack<Integer> stack = new LinkedListStack<>();
 //        stack.stack[0]=8;
         stack.push(981);
         stack.push(2500);
@@ -25,45 +25,56 @@ interface Stack<T> {
     boolean isEmpty();
 }
 
-class ArrayStack<T> implements Stack<T> {
-    int size;
-    int top = -1;
-    private T[] stack;
+class LinkedListStack<T> implements Stack<T> {
+    Node<T> top;
 
-    ArrayStack() {
-        size = 100;
-//        Class<T> tClass = (Class<T>) ((T) getClass()
-//                .getGenericSuperclass());
-        stack = (T[]) Array.newInstance(Object.class, size);
-    }
-
-    ArrayStack( int size) {
-        this.size = size;
-        stack = (T[]) Array.newInstance(Object.class, size);
+    LinkedListStack() {
+        top = null;
     }
 
     @Override
     public void push(T value) {
-        if (top>= size-1) return;
-        top++;
-        stack[top] = value;
+        Node<T> newValue = new Node<>(value);
+        if (top == null) {
+            top = newValue;
+            return;
+        }
+        newValue.next=top;
+        top=newValue;
     }
 
     @Override
     public T pop() {
-        if (top == -1) return null;
-        top --;
-        return stack[top + 1];
+        if(top==null)return null;
+        T last = top.value;
+        top=top.next;
+        return last;
     }
 
     @Override
     public T getTop() {
-
-        return stack[top];
+        return top.value;
     }
 
     @Override
     public boolean isEmpty() {
-        return top == 0;
+        return top==null;
     }
 }
+
+class Node<T> {
+    T value;
+    Node<T> next;
+
+    public Node() {
+        value = null;
+        next = null;
+    }
+
+    public Node(T value) {
+        this.value = value;
+        next = null;
+    }
+
+}
+
