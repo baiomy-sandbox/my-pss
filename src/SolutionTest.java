@@ -8,9 +8,10 @@ class SolutionTest extends AbsTest {
         solution.play();
     }
 
-//    @Test
-//    void case2() {
-//    }
+    @Test
+    void case2() {
+        System.out.println("operand = "+solution.infixToPostFix("1+9-8*3"));
+    }
 //    @Test
 //    void case3() {
 //    }
