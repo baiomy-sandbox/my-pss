@@ -3,18 +3,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Solution {
-    void play() {
-        Stack<Integer> stack = new LinkedListStack<>();
-//        stack.stack[0]=8;
-        stack.push(981);
-        stack.push(2500);
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
-        stack.push(5);
-        System.out.println(stack.getTop());
-    }
-
     String infixToPostFix(String infix) {
         StringBuilder postfix = new StringBuilder();
         StringBuilder number = new StringBuilder();
@@ -22,7 +10,6 @@ public class Solution {
         for (int i = 0; i < infix.length(); i++) {
             char ch = infix.charAt(i);
             if(Character.isDigit(ch)){
-                System.out.println("char is digit : "+ch);
                 number.append(ch);
                 if (i<infix.length()-1)
                 continue;
@@ -30,7 +17,6 @@ public class Solution {
             if (!number.isEmpty()){
             postfix.append(number);
             postfix.append( ' ');}
-            System.out.println("added number : "+ number.toString()+" postfix = "+ postfix.toString()+" char = "+ch+" :: i = "+i);
             number.setLength(0);
             switch (ch){
                 case '(':
@@ -38,11 +24,9 @@ public class Solution {
                     break;
                 case ')':{
                     char pop= operators.pop();
-                    System.out.println("start freeing");
                    while (pop!='('&&!operators.isEmpty()){
                        postfix.append(pop);
                        postfix.append(' ');
-                       System.out.println("before free = "+pop);
                        pop=operators.pop();
                    }
                    break;
@@ -51,12 +35,10 @@ public class Solution {
                 case '-':
                 case '*':
                 case '/': {
-                    System.out.println("there's op "+ch);
                     if (operators.isEmpty()) {
                         operators.push(ch);
                         break;
                     }
-                    System.out.println("there's op "+ch + "top = "+operators.getTop()+" should pop " +shouldPop(operators.getTop(),ch));
                     if (shouldPop(operators.getTop(),ch)) {
                         postfix.append(operators.pop());
                         postfix.append(' ');
@@ -64,7 +46,6 @@ public class Solution {
                         break;
                     }
                     operators.push(ch);
-                    System.out.println("added operator : "+operators.getTop());
                     break;
                 }
                 default:
@@ -73,9 +54,9 @@ public class Solution {
                 postfix.append(operators.pop());
                 postfix.append(" ");
             }
-            System.out.println("finished at "+postfix);
         }
-        return postfix.toString();
+
+        return postfix.toString().trim();
     }
 
     //give it stacktop then char;
