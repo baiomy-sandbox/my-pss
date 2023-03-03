@@ -27,11 +27,26 @@ public class Solution {
                 if (i<infix.length()-1)
                 continue;
             }
+            if (!number.isEmpty()){
             postfix.append(number);
-            postfix.append(' ');
+            postfix.append( ' ');}
             System.out.println("added number : "+ number.toString()+" postfix = "+ postfix.toString()+" char = "+ch+" :: i = "+i);
             number.setLength(0);
             switch (ch){
+                case '(':
+                    operators.push('(');
+                    break;
+                case ')':{
+                    char pop= operators.pop();
+                    System.out.println("start freeing");
+                   while (pop!='('&&!operators.isEmpty()){
+                       postfix.append(pop);
+                       postfix.append(' ');
+                       System.out.println("before free = "+pop);
+                       pop=operators.pop();
+                   }
+                   break;
+                }
                 case '+':
                 case '-':
                 case '*':
@@ -44,6 +59,7 @@ public class Solution {
                     System.out.println("there's op "+ch + "top = "+operators.getTop()+" should pop " +shouldPop(operators.getTop(),ch));
                     if (shouldPop(operators.getTop(),ch)) {
                         postfix.append(operators.pop());
+                        postfix.append(' ');
                         operators.push(ch);
                         break;
                     }
