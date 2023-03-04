@@ -10,10 +10,12 @@ class SolutionTest extends AbsTest {
 
     @Test
     void case2() {
-        assertEquals("1 9 + 8 9 * 3 * - 12 898 * +",solution.infixToPostFix("1+9-((8*9)*3)+(12*898)"));
-//        assertEquals("1+9-((8*9)*3)+(12*898)");
+        String expression = solution.infixToPostFix("1+9-(((8*9))*3)+(12*898)");
+        assertEquals(1+9-(((8*9))*3)+(12*898),solution.prefixEvaluation(expression));
     }
-//    @Test
-//    void case3() {
-//    }
+    @Test
+    void case3() {
+        String expression = solution.infixToPostFix("(98536+2)*33+(6/987)+40098");
+        assertEquals((98536+2)*33+(6/987)+40098,solution.prefixEvaluation(expression));
+    }
 }
