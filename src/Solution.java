@@ -1,19 +1,16 @@
 class Solution {
-    public void merge(int[] nums1, int m, int[] nums2, int n) {
-        int i=m-1;
-        int j=n-1;
-        int k=nums1.length-1;
+    int[] stairsAnswersCache=null;
 
-        while(j>=0){
-            if(i>=0 && nums1[i]>nums2[j]){
-                nums1[k]=nums1[i];
-                k--;
-                i--;
-            } else{
-                nums1[k] = nums2[j];
-                k--;
-                j--;
-            }
+    public int climbStairs(int n) {
+        if(n<=1) return 1;
+        if (n==2) return 2;
+        if (stairsAnswersCache==null){
+            stairsAnswersCache=new int[n+1];
         }
+        if (stairsAnswersCache[n]!=0){
+            return stairsAnswersCache[n];
+        }
+        stairsAnswersCache[n]=climbStairs(n-1)+climbStairs(n-2);
+        return stairsAnswersCache[n];
     }
 }
