@@ -1,20 +1,29 @@
+import java.util.LinkedList;
+import java.util.List;
 
-   class ListNode {
-      int val;
-      ListNode next;
-      ListNode(int x) { val = x; }
-  }
+ class TreeNode {
+     int val;
+     TreeNode left;
+     TreeNode right;
+     TreeNode() {}
+     TreeNode(int val) { this.val = val; }
+     TreeNode(int val, TreeNode left, TreeNode right) {
+         this.val = val;
+         this.left = left;
+         this.right = right;
+     }
+ }
 
 class Solution {
-    public void deleteNode(ListNode node) {
-        while(node.next!=null){
-            node.val=node.next.val;
-            if (node.next.next==null){
-                node.next=null;
-                break;
-            }
-            node=node.next;
-        }
-//        node=null;
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> list=new LinkedList<>();
+        addInorderToList(list,root);
+        return list;
+    }
+    public void addInorderToList(List<Integer> list, TreeNode node){
+        if (node==null)return;
+        addInorderToList(list,node.left);
+        list.add(node.val);
+        addInorderToList(list,node.right);
     }
 }
