@@ -1,29 +1,43 @@
 import java.util.LinkedList;
 import java.util.List;
 
- class TreeNode {
-     int val;
-     TreeNode left;
-     TreeNode right;
-     TreeNode() {}
-     TreeNode(int val) { this.val = val; }
-     TreeNode(int val, TreeNode left, TreeNode right) {
-         this.val = val;
-         this.left = left;
-         this.right = right;
-     }
- }
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode() {
+    }
+
+    TreeNode(int val) {
+        this.val = val;
+    }
+
+    TreeNode(int val, TreeNode left, TreeNode right) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
 
 class Solution {
-    public List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> list=new LinkedList<>();
-        addInorderToList(list,root);
-        return list;
+    public boolean isSymmetric(TreeNode root) {
+        if(root == null){
+            return true;
+        }
+        return checkSymmetric(root.left,root.right);
     }
-    public void addInorderToList(List<Integer> list, TreeNode node){
-        if (node==null)return;
-        addInorderToList(list,node.left);
-        list.add(node.val);
-        addInorderToList(list,node.right);
+    public boolean checkSymmetric(TreeNode leftNode,TreeNode rightNode){
+        if(leftNode == null && rightNode == null){
+            return true;
+        }
+        if(leftNode == null ^ rightNode == null){
+            return false;
+        }
+        if(leftNode.val != rightNode.val){
+            return false;
+        }
+        return checkSymmetric(leftNode.left,rightNode.right) && checkSymmetric(leftNode.right,rightNode.left);
+
     }
 }
