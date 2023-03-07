@@ -1,16 +1,20 @@
-class Solution {
-    int[] stairsAnswersCache=null;
 
-    public int climbStairs(int n) {
-        if(n<=1) return 1;
-        if (n==2) return 2;
-        if (stairsAnswersCache==null){
-            stairsAnswersCache=new int[n+1];
+   class ListNode {
+      int val;
+      ListNode next;
+      ListNode(int x) { val = x; }
+  }
+
+class Solution {
+    public void deleteNode(ListNode node) {
+        while(node.next!=null){
+            node.val=node.next.val;
+            if (node.next.next==null){
+                node.next=null;
+                break;
+            }
+            node=node.next;
         }
-        if (stairsAnswersCache[n]!=0){
-            return stairsAnswersCache[n];
-        }
-        stairsAnswersCache[n]=climbStairs(n-1)+climbStairs(n-2);
-        return stairsAnswersCache[n];
+//        node=null;
     }
 }
