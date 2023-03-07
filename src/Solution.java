@@ -1,43 +1,23 @@
-import java.util.LinkedList;
-import java.util.List;
-
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-
-    TreeNode() {
-    }
-
-    TreeNode(int val) {
-        this.val = val;
-    }
-
-    TreeNode(int val, TreeNode left, TreeNode right) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
-    }
-}
-
 class Solution {
-    public boolean isSymmetric(TreeNode root) {
-        if(root == null){
-            return true;
+    public boolean isPalindrome(String s) {
+        if (s.isEmpty()) return true;
+        int i = 0, j = s.length() - 1;
+        while (i <= j) {
+            if (Character.isLetterOrDigit(s.charAt(i))) {
+                i++;
+                continue;
+            }
+            if (Character.isLetterOrDigit(s.charAt(j))) {
+                j--;
+                continue;
+            }
+            if (Character.toLowerCase(s.charAt(i)) != Character.toLowerCase(s.charAt(j))) {
+                return false;
+            }
+            i++;
+            j--;
         }
-        return checkSymmetric(root.left,root.right);
-    }
-    public boolean checkSymmetric(TreeNode leftNode,TreeNode rightNode){
-        if(leftNode == null && rightNode == null){
-            return true;
-        }
-        if(leftNode == null ^ rightNode == null){
-            return false;
-        }
-        if(leftNode.val != rightNode.val){
-            return false;
-        }
-        return checkSymmetric(leftNode.left,rightNode.right) && checkSymmetric(leftNode.right,rightNode.left);
-
+        return true;
     }
 }
+
