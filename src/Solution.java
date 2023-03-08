@@ -1,23 +1,18 @@
 class Solution {
-    public boolean isPalindrome(String s) {
-        if (s.isEmpty()) return true;
-        int i = 0, j = s.length() - 1;
-        while (i <= j) {
-            if (Character.isLetterOrDigit(s.charAt(i))) {
-                i++;
-                continue;
+    public int maxProfit(int[] prices) {
+        int lsf = prices[0];
+        int op = 0;
+        int pist = 0;
+
+        for(int i = 1; i < prices.length; i++){
+            if(prices[i] < lsf){
+                lsf = prices[i];
             }
-            if (Character.isLetterOrDigit(s.charAt(j))) {
-                j--;
-                continue;
+            pist = prices[i] - lsf;
+            if(op < pist){
+                op = pist;
             }
-            if (Character.toLowerCase(s.charAt(i)) != Character.toLowerCase(s.charAt(j))) {
-                return false;
-            }
-            i++;
-            j--;
         }
-        return true;
+        return op;
     }
 }
-
