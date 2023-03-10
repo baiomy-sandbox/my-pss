@@ -4,13 +4,12 @@ class Solution {
         int nLen = needle.length();
         int nIndex = 0;
         for(int i=0; i<hLen; i++){
-            if(haystack.charAt(i)==needle.charAt(nIndex)){
-                nIndex++;
-            }
-            else{
+            if(haystack.charAt(i)!=needle.charAt(nIndex)){
                 i=i-nIndex;
                 nIndex=0;
+                continue;
             }
+            nIndex++;
             if(nIndex==nLen){
                 return i-nLen+1;
             }
