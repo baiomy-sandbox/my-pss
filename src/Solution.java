@@ -1,23 +1,11 @@
-import java.util.Arrays;
-
 class Solution {
-    public int majorityElement(int[] nums) {
-        Arrays.sort(nums);
-        int maxCount=nums.length/2;
-        int compare=nums[0];
-        int major=0;
-        for (int i = 0; i < nums.length; i++) {
-            if (compare==nums[i]){
-                major++;
-            }else {
-                compare=nums[i];
-                major=1;
-                continue;
-            }
-            if (major>maxCount){
-                return compare;
-            }
+    public int majorityElement(int[] arr) {
+        int major = arr[0];
+        int count = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (count == 0) major = arr[i];
+            count += (major == arr[i]) ? 1 : -1;
         }
         return major;
     }
-}
+};
