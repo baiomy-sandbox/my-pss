@@ -1,14 +1,20 @@
-    class Solution {
-        public int titleToNumber(String columnTitle) {
-            int count=0;
-            int power=0;
-            int length=columnTitle.length();
-            for (int i = 0; i <length; i++) {
-                int charNum=((int)columnTitle.charAt(length-1-i)-64);
-                count+=charNum*Math.pow(26,i);
-                System.out.println(((int)columnTitle.charAt(i)-64)*Math.pow(26,i));
-
+class Solution {
+    public int strStr(String haystack, String needle) {
+        int hLen = haystack.length();
+        int nLen = needle.length();
+        int nIndex = 0;
+        for(int i=0; i<hLen; i++){
+            if(haystack.charAt(i)==needle.charAt(nIndex)){
+                nIndex++;
             }
-            return count;
+            else{
+                i=i-nIndex;
+                nIndex=0;
+            }
+            if(nIndex==nLen){
+                return i-nLen+1;
+            }
         }
+        return -1;
     }
+}
