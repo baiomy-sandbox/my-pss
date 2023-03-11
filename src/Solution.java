@@ -1,19 +1,24 @@
+import java.util.ArrayList;
+import java.util.List;
+
 class Solution {
-    public int strStr(String haystack, String needle) {
-        int hLen = haystack.length();
-        int nLen = needle.length();
-        int nIndex = 0;
-        for(int i=0; i<hLen; i++){
-            if(haystack.charAt(i)!=needle.charAt(nIndex)){
-                i=i-nIndex;
-                nIndex=0;
+    public List<String> fizzBuzz(int n) {
+        List<String> words = new ArrayList<>();
+        for (int i = 1; i <= n; i++) {
+            if (i % 3 == 0) {
+                if (i % 5 == 0) {
+                    words.add("FizzBuzz");
+                    continue;
+                }
+                words.add("Fizz");
                 continue;
             }
-            nIndex++;
-            if(nIndex==nLen){
-                return i-nLen+1;
+            if (i % 5 == 0) {
+                words.add("Buzz");
+                continue;
             }
+            words.add("" + i);
         }
-        return -1;
+        return words;
     }
 }
