@@ -1,24 +1,41 @@
-import java.util.ArrayList;
-import java.util.List;
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode() {
+    }
+
+    TreeNode(int val) {
+        this.val = val;
+    }
+
+    TreeNode(int val, TreeNode left, TreeNode right) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
 
 class Solution {
-    public List<String> fizzBuzz(int n) {
-        List<String> words = new ArrayList<>();
-        for (int i = 1; i <= n; i++) {
-            if (i % 3 == 0) {
-                if (i % 5 == 0) {
-                    words.add("FizzBuzz");
-                    continue;
-                }
-                words.add("Fizz");
-                continue;
-            }
-            if (i % 5 == 0) {
-                words.add("Buzz");
-                continue;
-            }
-            words.add("" + i);
+    public TreeNode deleteNode(TreeNode root, int key) {
+        if (root == null) return null;
+        if (key < root.val) {root.left = deleteNode(root.left, key);return root;};
+        if (key > root.val) {root.right = deleteNode(root.right, key);return root;};
+        if (root.right == null && root.left == null) return null;
+        if (root.left == null) {
+            return root.right;
         }
-        return words;
+        if (root.right == null) {
+            return root.left;
+        }
+        TreeNode temp = getMin(root.right);
+        root.val=temp.val;
+        root.right=deleteNode(root.right,temp.val);
+        return root;
+    }
+    public TreeNode getMin(TreeNode root){
+        if (root.left==null)return root;
+        return getMin(root.left);
     }
 }
