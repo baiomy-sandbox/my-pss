@@ -1,41 +1,25 @@
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
 
-    TreeNode() {
-    }
-
-    TreeNode(int val) {
-        this.val = val;
-    }
-
-    TreeNode(int val, TreeNode left, TreeNode right) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
-    }
-}
+ public class TreeNode {
+     int val;
+     TreeNode left;
+     TreeNode right;
+     TreeNode() {}
+     TreeNode(int val) { this.val = val; }
+     TreeNode(int val, TreeNode left, TreeNode right) {
+         this.val = val;
+         this.left = left;
+         this.right = right;
+     }
+ }
 
 class Solution {
-    public TreeNode deleteNode(TreeNode root, int key) {
-        if (root == null) return null;
-        if (key < root.val) {root.left = deleteNode(root.left, key);return root;};
-        if (key > root.val) {root.right = deleteNode(root.right, key);return root;};
-        if (root.right == null && root.left == null) return null;
-        if (root.left == null) {
-            return root.right;
-        }
-        if (root.right == null) {
-            return root.left;
-        }
-        TreeNode temp = getMin(root.right);
-        root.val=temp.val;
-        root.right=deleteNode(root.right,temp.val);
-        return root;
+    public TreeNode sortedArrayToBST(int[] nums) {
+if (nums==null||nums.length==0)return null;
+return constructArray(nums,0,nums.length-1);
     }
-    public TreeNode getMin(TreeNode root){
-        if (root.left==null)return root;
-        return getMin(root.left);
+    public TreeNode constructArray(int[] nums,int left,int right){
+        if (left>right)return null;
+        int mid=left+(right-left)/2;
+        return new TreeNode(nums[mid],constructArray(nums,left,mid-1),constructArray(nums,mid+1,right));
     }
 }
