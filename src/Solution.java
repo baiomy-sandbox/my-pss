@@ -1,20 +1,26 @@
+import java.util.HashSet;
+
 class Solution {
-    public int[] countBits(int n) {
-        int num=0;
-        int[] sums=new int[n+1];
-        for (int i = 0; i <=n; i++) {
-            System.out.println("n = "+n+" count = "+count(n)+"pos = "+(i));
-            sums[i]=count(num);
-            num++;
+    public boolean isHappy(int n) {
+        HashSet<Integer> set = new HashSet<Integer>();
+
+        while (n != 1) {
+
+            int current = n;
+            int sqrSum = 0;
+
+            while (current != 0) {
+                int r = current % 10;
+                sqrSum = sqrSum + r * r;
+                current = current / 10;
+            }
+            if (set.contains(sqrSum)) {
+                return false;
+            }
+            set.add(sqrSum);
+            n = sqrSum;
+
         }
-        return sums;
-    }
-    public int count(int n) {
-        int sum = 0;
-        while(n != 0){
-            sum++;
-            n &= (n-1);
-        }
-        return sum;
+        return true;
     }
 }
