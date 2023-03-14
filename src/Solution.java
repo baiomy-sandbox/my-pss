@@ -1,26 +1,22 @@
-import java.util.HashSet;
 
-class Solution {
-    public boolean isHappy(int n) {
-        HashSet<Integer> set = new HashSet<Integer>();
+  class ListNode {
+     int val;
+     ListNode next;
+     ListNode() {}
+     ListNode(int val) { this.val = val; }
+     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ }
 
-        while (n != 1) {
-
-            int current = n;
-            int sqrSum = 0;
-
-            while (current != 0) {
-                int r = current % 10;
-                sqrSum = sqrSum + r * r;
-                current = current / 10;
-            }
-            if (set.contains(sqrSum)) {
-                return false;
-            }
-            set.add(sqrSum);
-            n = sqrSum;
-
-        }
-        return true;
-    }
-}
+  class Solution {
+      public ListNode reverseList(ListNode head) {
+          ListNode prev = null;
+          ListNode current = head;
+          while(current != null) {
+              ListNode next = current.next;
+              current.next = prev;
+              prev = current;
+              current = next;
+          }
+          return prev;
+      }
+  }
