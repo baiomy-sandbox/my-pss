@@ -1,14 +1,13 @@
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Arrays;
 
 class Solution {
-    public boolean containsDuplicate(int[] nums) {
+    public boolean isAnagram(String s, String t) {
+        if(s.length()!=t.length())  return false;
+        char tempArray1[] = s.toCharArray();
+        char tempArray2[] = t.toCharArray();
 
-        Set<Integer> set = new HashSet<>();
-        for (int num : nums) {
-            if(set.contains(num))return true;
-            set.add(num);
-        }
-        return false;
+        Arrays.sort(tempArray1);
+        Arrays.sort(tempArray2);
+        return new String(tempArray1).equals(new String(tempArray2));
     }
 }
