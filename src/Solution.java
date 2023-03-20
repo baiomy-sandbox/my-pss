@@ -1,17 +1,18 @@
-import java.util.HashSet;
-
 class Solution {
-    public int lengthOfLongestSubstring(String s) {
-        HashSet<Character> set = new HashSet();
-        int max = 0;
-        int left = 0;
-        for (int right = 0; right < s.length(); right++) {
-            while(!set.add(s.charAt(right))) {
-                set.remove(s.charAt(left++));
-            }
-            max = Math.max(max, right - left + 1);
+    public int reverse(int x) {
+        long ans = 0;
+        while(x!=0){
+            ans += x%10;
+            ans = ans*10;
+            x= x/10;
         }
-        return max;
+        ans = ans/10;
+        if(ans > Integer.MAX_VALUE || ans<Integer.MIN_VALUE){
+            return 0;
+        }
+        if(x<0){
+            return (int)(-1*ans);
+        }
+        return (int)ans;
     }
 }
-
