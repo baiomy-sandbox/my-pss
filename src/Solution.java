@@ -1,18 +1,19 @@
 class Solution {
-    public int reverse(int x) {
-        long ans = 0;
-        while(x!=0){
-            ans += x%10;
-            ans = ans*10;
-            x= x/10;
+    public ListNode removeNthFromEnd(ListNode head, int n){
+        ListNode ans=new ListNode();
+        ans.next=head;
+        ListNode fast=ans;
+        ListNode slow=ans;
+
+        for(int i=1;i<=n;i++){
+            fast=fast.next;
         }
-        ans = ans/10;
-        if(ans > Integer.MAX_VALUE || ans<Integer.MIN_VALUE){
-            return 0;
+
+        while(fast.next!=null){
+            slow=slow.next;
+            fast=fast.next;
         }
-        if(x<0){
-            return (int)(-1*ans);
-        }
-        return (int)ans;
+        slow.next=slow.next.next;
+        return ans.next;
     }
 }
